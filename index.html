@@ -1,121 +1,724 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luan Bordignon | Portfólio BI</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #222;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Luan Bordignon · Portfólio BI</title>
+<meta name="description" content="Portfólio de Business Intelligence de Luan Bordignon — dashboards de Power BI, modelagem de dados, SQL e Python." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink:      #0B1719;
+    --ink-2:    #0F2124;
+    --card:     #12262A;
+    --line:     rgba(140, 186, 178, 0.14);
+    --line-2:   rgba(140, 186, 178, 0.28);
+    --text:     #E9F1EE;
+    --muted:    #8AA6A0;
+    --mint:     #38E0BE;
+    --mint-dim: rgba(56, 224, 190, 0.14);
+    --amber:    #FFC24B;
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 60px 20px;
-      text-align: center;
-    }
+    --display: 'Space Grotesk', system-ui, sans-serif;
+    --body:    'Inter', system-ui, sans-serif;
+    --mono:    'JetBrains Mono', ui-monospace, monospace;
 
-    header h1 {
-      margin: 0;
-      font-size: 42px;
-    }
+    --wrap: 1080px;
+  }
 
-    header p {
-      margin-top: 10px;
-      font-size: 18px;
-      color: #cbd5e1;
-    }
+  * { box-sizing: border-box; }
 
-    .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+  html { scroll-behavior: smooth; }
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
-    }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    .card h2 {
-      margin-top: 0;
-    }
+  a { color: inherit; }
 
-    .btn {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 18px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
+  ::selection { background: var(--mint); color: var(--ink); }
 
-    .btn:hover {
-      background: #1d4ed8;
-    }
+  :focus-visible {
+    outline: 2px solid var(--mint);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #64748b;
-    }
-  </style>
+  .wrap {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--mint);
+    box-shadow: 0 0 0 0 rgba(56, 224, 190, 0.5);
+    animation: pulse 2.6s infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(56, 224, 190, 0.45); }
+    70%  { box-shadow: 0 0 0 7px rgba(56, 224, 190, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 224, 190, 0); }
+  }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(11, 23, 25, 0.72);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .brand span { color: var(--mint); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  @media (max-width: 620px) { .nav-links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, #000 40%, transparent 100%);
+    animation: drift 24s linear infinite;
+  }
+  @keyframes drift {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 46px 46px, 46px 46px; }
+  }
+  .hero-glow {
+    position: absolute;
+    top: -20%; left: 50%;
+    width: 620px; height: 620px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(56,224,190,0.10), transparent 62%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    padding: 108px 0 92px;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(44px, 8vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 20px 0 0;
+  }
+  .hero h1 .accent { color: var(--mint); }
+  .hero .role {
+    font-family: var(--mono);
+    font-size: clamp(14px, 2.4vw, 17px);
+    color: var(--muted);
+    margin-top: 22px;
+    letter-spacing: 0.02em;
+  }
+  .hero .role b { color: var(--text); font-weight: 500; }
+  .status-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 34px;
+  }
+  .chip {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 7px 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .chip.live { color: var(--text); }
+
+  /* ---------- Sections ---------- */
+  section { padding: 84px 0; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+    border-top: 1px solid var(--line);
+    padding-top: 22px;
+  }
+  .section-head h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -0.01em;
+    margin: 6px 0 0;
+  }
+  .section-index {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--mint);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---------- About ---------- */
+  .about {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .about p {
+    font-size: 18px;
+    color: #C6D6D2;
+    margin: 0 0 16px;
+    max-width: 56ch;
+  }
+  .about .facts {
+    border-left: 1px solid var(--line-2);
+    padding-left: 24px;
+  }
+  .fact {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .fact:last-child { border-bottom: none; }
+  .fact b { color: var(--text); font-weight: 500; }
+  @media (max-width: 760px) {
+    .about { grid-template-columns: 1fr; }
+    .about .facts { border-left: none; padding-left: 0; }
+  }
+
+  /* ---------- Projects ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+
+  .tile {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 26px 22px;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .tile::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--mint), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .tile:hover { transform: translateY(-4px); border-color: var(--line-2); }
+  .tile:hover::before { transform: scaleX(1); }
+
+  .tile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .tag-domain {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .tile h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .tile p {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin: 0 0 20px;
+    min-height: 44px;
+  }
+
+  .kpi {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .kpi-num {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+  }
+  .kpi-meta { display: flex; flex-direction: column; gap: 3px; }
+  .kpi-label {
+    font-size: 12.5px;
+    color: var(--muted);
+    max-width: 22ch;
+    line-height: 1.35;
+  }
+  .ex {
+    align-self: flex-start;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    border: 1px solid rgba(255, 194, 75, 0.4);
+    border-radius: 4px;
+    padding: 2px 5px;
+  }
+
+  .spark { width: 100%; height: 40px; margin-bottom: 18px; display: block; }
+  .spark path.line {
+    fill: none;
+    stroke: var(--mint);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+  }
+  .tile.seen .spark path.line {
+    animation: draw 1.3s ease forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 20px;
+  }
+  .stack span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--ink-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 9px;
+  }
+
+  .tile-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    width: 100%;
+    justify-content: space-between;
+    transition: color 0.2s;
+  }
+  .tile-cta:hover { color: var(--mint); }
+  .tile-cta .arrow { transition: transform 0.25s; }
+  .tile-cta:hover .arrow { transform: translateX(4px); }
+
+  /* ---------- Skills ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+  }
+  .skill-col h4 {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill-col ul { list-style: none; margin: 0; padding: 0; }
+  .skill-col li {
+    font-size: 15px;
+    color: #C6D6D2;
+    padding: 5px 0;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    text-align: center;
+    border-top: 1px solid var(--line);
+  }
+  .contact h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(30px, 6vw, 52px);
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+  .contact p { color: var(--muted); margin: 0 auto 34px; max-width: 44ch; }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    transition: transform 0.2s, background 0.2s, border-color 0.2s;
+  }
+  .btn.primary { background: var(--mint); color: var(--ink); }
+  .btn.primary:hover { transform: translateY(-2px); background: #4EEBCB; }
+  .btn.ghost { border: 1px solid var(--line-2); color: var(--text); }
+  .btn.ghost:hover { transform: translateY(-2px); border-color: var(--mint); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 26px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* ---------- Reveal ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.seen { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    .spark path.line { stroke-dashoffset: 0; }
+    html { scroll-behavior: auto; }
+  }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Luan Bordignon</h1>
-  <p>Analista Sênior de Dados | Power BI | SQL | Python | Databricks</p>
-</header>
-
-<div class="container">
-
-  <div class="card">
-    <h2>Sobre mim</h2>
-    <p>
-      Profissional de dados com experiência em BI, analytics e automação,
-      atuando em projetos de varejo, tributário e logística.
-    </p>
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">luan<span>.</span>bi</div>
+    <nav class="nav-links">
+      <a href="#sobre">sobre</a>
+      <a href="#projetos">projetos</a>
+      <a href="#stack">stack</a>
+      <a href="#contato">contato</a>
+    </nav>
   </div>
-
-  <div class="card">
-    <h2>Dashboard de Vendas</h2>
-    <p>Análise executiva de faturamento, margem e ticket médio.</p>
-    <a class="btn" href="https://app.powerbi.com/" target="_blank">
-      Ver Dashboard
-    </a>
-  </div>
-
-  <div class="card">
-    <h2>Dashboard Tributário</h2>
-    <p>Indicadores de ICMS, créditos fiscais e oportunidades de economia.</p>
-    <a class="btn" href="https://app.powerbi.com/" target="_blank">
-      Ver Dashboard
-    </a>
-  </div>
-
-  <div class="card">
-    <h2>Dashboard Logístico</h2>
-    <p>Monitoramento de SLA, estoque e lead time.</p>
-    <a class="btn" href="https://app.powerbi.com/" target="_blank">
-      Ver Dashboard
-    </a>
-  </div>
-
 </div>
 
-<footer>
-  © 2026 Luan Bordignon • Florianópolis - SC
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Analista Sênior de Dados · BI</span>
+    <h1>Luan<br />Bordignon<span class="accent">.</span></h1>
+    <p class="role">Transformo dados brutos em <b>decisão</b> — modelagem, <b>Power BI</b>, SQL e Python.</p>
+    <div class="status-row">
+      <span class="chip live"><span class="dot"></span>Aberto a oportunidades</span>
+      <span class="chip">Florianópolis, BR</span>
+      <span class="chip">PT · EN (C1)</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ================= SOBRE ================= -->
+  <section id="sobre" class="reveal">
+    <div class="section-head">
+      <div>
+        <span class="section-index">01</span>
+        <h2>Sobre</h2>
+      </div>
+    </div>
+    <div class="about">
+      <div>
+        <p>Trabalho com BI de ponta a ponta: da modelagem do dado até o dashboard que a diretoria usa pra decidir. Já atuei em varejo, tributário e logística, sempre com foco em transformar relatório em resposta.</p>
+        <p>Meu prazer é o meio do caminho — o modelo em estrela bem montado, a medida DAX que fecha, o pipeline que roda sozinho. É o que faz o número ser confiável.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span>Foco</span><b>Power BI · DAX</b></div>
+        <div class="fact"><span>Dados</span><b>SQL · Databricks</b></div>
+        <div class="fact"><span>Automação</span><b>Python · N8N</b></div>
+        <div class="fact"><span>Cert.</span><b>Cloudera Data Analyst</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJETOS ================= -->
+  <section id="projetos">
+    <div class="section-head reveal">
+      <div>
+        <span class="section-index">02</span>
+        <h2>Projetos</h2>
+      </div>
+      <span class="eyebrow">3 dashboards</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- PROJETO 1 -->
+      <article class="tile reveal">
+        <div class="tile-top">
+          <span class="tag-domain">Varejo</span>
+          <span class="eyebrow">01</span>
+        </div>
+        <h3>Dashboard de Vendas</h3>
+        <p>Visão executiva de faturamento, margem e ticket médio, com drill de região a produto.</p>
+        <div class="kpi">
+          <span class="kpi-num" data-to="18">0</span>
+          <div class="kpi-meta">
+            <span class="ex">exemplo</span>
+            <span class="kpi-label">% de crescimento de margem no período</span>
+          </div>
+        </div>
+        <!-- TROQUE data-to e o texto acima pela sua métrica real -->
+        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
+          <path class="line" d="M0,32 L37,26 L74,29 L111,18 L148,22 L185,11 L222,14 L260,4" />
+        </svg>
+        <div class="stack"><span>Power BI</span><span>DAX</span><span>SQL</span></div>
+        <!-- TROQUE href pelo link real do relatório -->
+        <a class="tile-cta" href="#" target="_blank" rel="noopener">
+          Ver dashboard <span class="arrow">→</span>
+        </a>
+      </article>
+
+      <!-- PROJETO 2 -->
+      <article class="tile reveal">
+        <div class="tile-top">
+          <span class="tag-domain">Tributário</span>
+          <span class="eyebrow">02</span>
+        </div>
+        <h3>Dashboard Tributário</h3>
+        <p>Indicadores de ICMS, créditos fiscais e oportunidades de economia por operação.</p>
+        <div class="kpi">
+          <span class="kpi-num" data-to="12" data-prefix="R$ " data-suffix="M">0</span>
+          <div class="kpi-meta">
+            <span class="ex">exemplo</span>
+            <span class="kpi-label">em créditos fiscais identificados</span>
+          </div>
+        </div>
+        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
+          <path class="line" d="M0,20 L37,24 L74,15 L111,19 L148,10 L185,16 L222,8 L260,12" />
+        </svg>
+        <div class="stack"><span>Power BI</span><span>DAX</span><span>Python</span></div>
+        <a class="tile-cta" href="#" target="_blank" rel="noopener">
+          Ver dashboard <span class="arrow">→</span>
+        </a>
+      </article>
+
+      <!-- PROJETO 3 -->
+      <article class="tile reveal">
+        <div class="tile-top">
+          <span class="tag-domain">Logística</span>
+          <span class="eyebrow">03</span>
+        </div>
+        <h3>Dashboard Logístico</h3>
+        <p>Monitoramento de SLA, nível de estoque e lead time entre centros de distribuição.</p>
+        <div class="kpi">
+          <span class="kpi-num" data-to="9" data-suffix=" pts">0</span>
+          <div class="kpi-meta">
+            <span class="ex">exemplo</span>
+            <span class="kpi-label">de ganho no SLA de entrega</span>
+          </div>
+        </div>
+        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
+          <path class="line" d="M0,30 L37,28 L74,22 L111,25 L148,16 L185,18 L222,9 L260,6" />
+        </svg>
+        <div class="stack"><span>Power BI</span><span>SQL</span><span>N8N</span></div>
+        <a class="tile-cta" href="#" target="_blank" rel="noopener">
+          Ver dashboard <span class="arrow">→</span>
+        </a>
+      </article>
+
+      <!-- PROJETO 4 (opcional / novo) -->
+      <article class="tile reveal">
+        <div class="tile-top">
+          <span class="tag-domain">Novo</span>
+          <span class="eyebrow">04</span>
+        </div>
+        <h3>Próximo projeto</h3>
+        <p>Espaço reservado pro seu case mais recente. Duplique este cartão e preencha.</p>
+        <div class="kpi">
+          <span class="kpi-num" data-to="0">—</span>
+          <div class="kpi-meta">
+            <span class="kpi-label">seu principal resultado aqui</span>
+          </div>
+        </div>
+        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
+          <path class="line" d="M0,24 L37,20 L74,26 L111,17 L148,21 L185,12 L222,15 L260,9" />
+        </svg>
+        <div class="stack"><span>+ stack</span></div>
+        <a class="tile-cta" href="#" target="_blank" rel="noopener">
+          Ver dashboard <span class="arrow">→</span>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= STACK ================= -->
+  <section id="stack" class="reveal">
+    <div class="section-head">
+      <div>
+        <span class="section-index">03</span>
+        <h2>Stack</h2>
+      </div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h4>Visualização</h4>
+        <ul><li>Power BI</li><li>DAX</li><li>Looker Studio</li></ul>
+      </div>
+      <div class="skill-col">
+        <h4>Dados</h4>
+        <ul><li>SQL</li><li>Databricks</li><li>Modelagem estrela</li></ul>
+      </div>
+      <div class="skill-col">
+        <h4>Linguagens</h4>
+        <ul><li>Python</li><li>DAX</li><li>M / Power Query</li></ul>
+      </div>
+      <div class="skill-col">
+        <h4>Automação</h4>
+        <ul><li>N8N</li><li>Salesforce</li><li>ETL</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO ================= -->
+  <section id="contato" class="contact reveal">
+    <h2>Vamos conversar.</h2>
+    <p>Aberto a oportunidades em BI e Analytics — inclusive remoto internacional.</p>
+    <div class="actions">
+      <!-- TROQUE pelos seus links reais -->
+      <a class="btn primary" href="mailto:seu-email@exemplo.com">E-mail →</a>
+      <a class="btn ghost" href="https://linkedin.com/in/seu-perfil" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn ghost" href="https://github.com/alchemydot" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" href="#" target="_blank" rel="noopener">Baixar CV</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Luan Bordignon</span>
+  <span>Florianópolis · SC · Brasil</span>
 </footer>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal on scroll + trigger sparkline draw + KPI count-up
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('seen');
+      const kpi = e.target.querySelector('.kpi-num[data-to]');
+      if (kpi) countUp(kpi);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.reveal, .tile').forEach((el) => io.observe(el));
+
+  function countUp(el) {
+    const to = parseFloat(el.dataset.to);
+    if (isNaN(to) || to === 0) return;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    if (reduce) { el.textContent = prefix + to + suffix; return; }
+    const dur = 1100;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.round(to * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+</script>
 
 </body>
 </html>
