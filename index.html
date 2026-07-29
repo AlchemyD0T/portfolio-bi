@@ -385,6 +385,9 @@
   .tile-cta:hover { color: var(--mint); }
   .tile-cta .arrow { transition: transform 0.25s; }
   .tile-cta:hover .arrow { transform: translateX(4px); }
+  .tile-cta.soon { color: var(--muted); cursor: default; }
+  .tile-cta.soon:hover { color: var(--muted); }
+  .tile-cta.soon:hover .arrow { transform: none; }
 
   /* ---------- Skills ---------- */
   .skills-grid {
@@ -533,108 +536,54 @@
         <span class="section-index">02</span>
         <h2>Projetos</h2>
       </div>
-      <span class="eyebrow">3 dashboards</span>
+      <span class="eyebrow">em evolução</span>
     </div>
 
     <div class="grid">
 
-      <!-- PROJETO 1 -->
-    <article class="tile reveal">
-  <div class="tile-top">
-    <span class="tag-domain">Locação · Desafio</span>
-    <span class="eyebrow">01</span>
-  </div>
-  <h3>Previsão de Receita — Me2 Rentals</h3>
-  <p>Desafio técnico de seleção: modelo estrela construído do zero e projeção de receita em três cenários, com documento de metodologia.</p>
-  <div class="kpi">
-    <span class="kpi-num" data-to="3">0</span>
-    <div class="kpi-meta">
-      <span class="kpi-label">cenários de receita projetados — P10 / P50 / P90</span>
-    </div>
-  </div>
-  <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
-    <path class="line" d="M0,32 L37,26 L74,29 L111,18 L148,22 L185,11 L222,14 L260,4" />
-  </svg>
-  <div class="stack"><span>Power BI</span><span>DAX</span><span>Modelagem estrela</span></div>
-  <!-- TROQUE href pelo link "Publicar na web" do Power BI -->
-  <a class="tile-cta" href="#" target="_blank" rel="noopener">
-    Ver dashboard <span class="arrow">→</span>
-  </a>
-</article>
-        <!-- TROQUE href pelo link real do relatório -->
+      <!-- PROJETO 01 — Me2 (real) -->
+      <article class="tile reveal">
+        <div class="tile-top">
+          <span class="tag-domain">Locação · Desafio</span>
+          <span class="eyebrow">01</span>
+        </div>
+        <h3>Previsão de Receita — Me2 Rentals</h3>
+        <p>Desafio técnico de seleção: modelo estrela construído do zero e projeção de receita em três cenários, com documento de metodologia.</p>
+        <div class="kpi">
+          <span class="kpi-num" data-to="3">0</span>
+          <div class="kpi-meta">
+            <span class="kpi-label">cenários de receita projetados — P10 / P50 / P90</span>
+          </div>
+        </div>
+        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
+          <path class="line" d="M0,32 L37,26 L74,29 L111,18 L148,22 L185,11 L222,14 L260,4" />
+        </svg>
+        <div class="stack"><span>Power BI</span><span>DAX</span><span>Modelagem estrela</span></div>
         <a class="tile-cta" href="https://app.powerbi.com/view?r=eyJrIjoiMDJiNjFiYTctMTIyOC00MGU0LWFmMjgtNjdkMDI1OGRhOTc1IiwidCI6IjI5NzljZWMxLTg2MTMtNDFhNC05YzFjLTEwZTg4OTMwYzcxMyJ9&embedImagePlaceholder=true" target="_blank" rel="noopener">
           Ver dashboard <span class="arrow">→</span>
         </a>
       </article>
 
-      <!-- PROJETO 2 -->
+      <!-- PROJETO 02 — Folha (em breve, versão demo com dados fictícios) -->
       <article class="tile reveal">
         <div class="tile-top">
-          <span class="tag-domain">Tributário</span>
+          <span class="tag-domain">RH · Em breve</span>
           <span class="eyebrow">02</span>
         </div>
-        <h3>Dashboard Tributário</h3>
-        <p>Indicadores de ICMS, créditos fiscais e oportunidades de economia por operação.</p>
+        <h3>Painel de Folha de Pagamento</h3>
+        <p>Dashboard multi-página de folha — rubricas, cargos e comissionados. Sendo recriado com dados fictícios para publicação segura.</p>
         <div class="kpi">
-          <span class="kpi-num" data-to="12" data-prefix="R$ " data-suffix="M">0</span>
+          <span class="kpi-num">—</span>
           <div class="kpi-meta">
-            <span class="ex">exemplo</span>
-            <span class="kpi-label">em créditos fiscais identificados</span>
-          </div>
-        </div>
-        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
-          <path class="line" d="M0,20 L37,24 L74,15 L111,19 L148,10 L185,16 L222,8 L260,12" />
-        </svg>
-        <div class="stack"><span>Power BI</span><span>DAX</span><span>Python</span></div>
-        <a class="tile-cta" href="#" target="_blank" rel="noopener">
-          Ver dashboard <span class="arrow">→</span>
-        </a>
-      </article>
-
-      <!-- PROJETO 3 -->
-      <article class="tile reveal">
-        <div class="tile-top">
-          <span class="tag-domain">Logística</span>
-          <span class="eyebrow">03</span>
-        </div>
-        <h3>Dashboard Logístico</h3>
-        <p>Monitoramento de SLA, nível de estoque e lead time entre centros de distribuição.</p>
-        <div class="kpi">
-          <span class="kpi-num" data-to="9" data-suffix=" pts">0</span>
-          <div class="kpi-meta">
-            <span class="ex">exemplo</span>
-            <span class="kpi-label">de ganho no SLA de entrega</span>
-          </div>
-        </div>
-        <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
-          <path class="line" d="M0,30 L37,28 L74,22 L111,25 L148,16 L185,18 L222,9 L260,6" />
-        </svg>
-        <div class="stack"><span>Power BI</span><span>SQL</span><span>N8N</span></div>
-        <a class="tile-cta" href="#" target="_blank" rel="noopener">
-          Ver dashboard <span class="arrow">→</span>
-        </a>
-      </article>
-
-      <!-- PROJETO 4 (opcional / novo) -->
-      <article class="tile reveal">
-        <div class="tile-top">
-          <span class="tag-domain">Novo</span>
-          <span class="eyebrow">04</span>
-        </div>
-        <h3>Próximo projeto</h3>
-        <p>Espaço reservado pro seu case mais recente. Duplique este cartão e preencha.</p>
-        <div class="kpi">
-          <span class="kpi-num" data-to="0">—</span>
-          <div class="kpi-meta">
-            <span class="kpi-label">seu principal resultado aqui</span>
+            <span class="kpi-label">versão demo em preparação</span>
           </div>
         </div>
         <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
           <path class="line" d="M0,24 L37,20 L74,26 L111,17 L148,21 L185,12 L222,15 L260,9" />
         </svg>
-        <div class="stack"><span>+ stack</span></div>
-        <a class="tile-cta" href="#" target="_blank" rel="noopener">
-          Ver dashboard <span class="arrow">→</span>
+        <div class="stack"><span>Power BI</span><span>DAX</span><span>SQL</span></div>
+        <a class="tile-cta soon" href="#" aria-disabled="true">
+          Em breve <span class="arrow">→</span>
         </a>
       </article>
 
@@ -674,11 +623,10 @@
     <h2>Vamos conversar.</h2>
     <p>Aberto a oportunidades em BI e Analytics — inclusive remoto internacional.</p>
     <div class="actions">
-      <!-- TROQUE pelos seus links reais -->
       <a class="btn primary" href="mailto:luanre59@gmail.com">E-mail →</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/luan-bordignon-885547148/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn ghost" href="https://github.com/alchemydot" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn ghost" href="Luan_Bordignon_CV_BR.pdf" download>Baixar CV</a> 
+      <a class="btn ghost" href="Luan_Bordignon_CV_BR.pdf" download>Baixar CV</a>
     </div>
   </section>
 
