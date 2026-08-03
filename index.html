@@ -103,6 +103,11 @@
     letter-spacing: 0.04em;
   }
   .brand span { color: var(--mint); }
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
   .nav-links {
     display: flex;
     gap: 28px;
@@ -117,6 +122,23 @@
   }
   .nav-links a:hover { color: var(--text); }
   @media (max-width: 620px) { .nav-links { display: none; } }
+
+  /* ---------- Language selector ---------- */
+  .lang { display: flex; gap: 8px; align-items: center; }
+  .flag {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 4px 6px;
+    cursor: pointer;
+    line-height: 0;
+    opacity: 0.4;
+    transition: opacity 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .flag:hover { opacity: 0.85; }
+  .flag.active { opacity: 1; border-color: var(--mint); }
+  .flag:active { transform: scale(0.94); }
+  .flag svg { display: block; border-radius: 2px; }
 
   /* ---------- Hero ---------- */
   .hero {
@@ -324,17 +346,6 @@
     max-width: 22ch;
     line-height: 1.35;
   }
-  .ex {
-    align-self: flex-start;
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--amber);
-    border: 1px solid rgba(255, 194, 75, 0.4);
-    border-radius: 4px;
-    padding: 2px 5px;
-  }
 
   .spark { width: 100%; height: 40px; margin-bottom: 18px; display: block; }
   .spark path.line {
@@ -385,9 +396,6 @@
   .tile-cta:hover { color: var(--mint); }
   .tile-cta .arrow { transition: transform 0.25s; }
   .tile-cta:hover .arrow { transform: translateX(4px); }
-  .tile-cta.soon { color: var(--muted); cursor: default; }
-  .tile-cta.soon:hover { color: var(--muted); }
-  .tile-cta.soon:hover .arrow { transform: none; }
 
   /* ---------- Skills ---------- */
   .skills-grid {
@@ -480,13 +488,41 @@
 
 <div class="topbar">
   <div class="wrap">
-    <div class="brand">Bordignon<span>.</span>Consultoria</div>
-    <nav class="nav-links">
-      <a href="#sobre">sobre</a>
-      <a href="#projetos">projetos</a>
-      <a href="#stack">stack</a>
-      <a href="#contato">contato</a>
-    </nav>
+    <div class="brand" data-en='Bordignon<span>.</span>Consulting'>Bordignon<span>.</span>Consultoria</div>
+    <div class="topbar-right">
+      <nav class="nav-links">
+        <a href="#sobre" data-en="about">sobre</a>
+        <a href="#projetos" data-en="projects">projetos</a>
+        <a href="#stack" data-en="stack">stack</a>
+        <a href="#contato" data-en="contact">contato</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button class="flag active" data-lang="pt" aria-label="Português" title="Português">
+          <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="20" fill="#009c3b"/>
+            <polygon points="14,2.5 25.5,10 14,17.5 2.5,10" fill="#ffdf00"/>
+            <circle cx="14" cy="10" r="4.1" fill="#002776"/>
+          </svg>
+        </button>
+        <button class="flag" data-lang="en" aria-label="English" title="English">
+          <svg width="22" height="16" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg">
+            <rect width="28" height="20" fill="#b22234"/>
+            <g fill="#fff">
+              <rect y="1.54" width="28" height="1.54"/><rect y="4.62" width="28" height="1.54"/>
+              <rect y="7.69" width="28" height="1.54"/><rect y="10.77" width="28" height="1.54"/>
+              <rect y="13.85" width="28" height="1.54"/><rect y="16.92" width="28" height="1.54"/>
+            </g>
+            <rect width="12.2" height="10.77" fill="#3c3b6e"/>
+            <g fill="#fff">
+              <circle cx="2.4" cy="2.2" r="0.7"/><circle cx="6.1" cy="2.2" r="0.7"/><circle cx="9.8" cy="2.2" r="0.7"/>
+              <circle cx="4.2" cy="4.2" r="0.7"/><circle cx="7.9" cy="4.2" r="0.7"/>
+              <circle cx="2.4" cy="6.2" r="0.7"/><circle cx="6.1" cy="6.2" r="0.7"/><circle cx="9.8" cy="6.2" r="0.7"/>
+              <circle cx="4.2" cy="8.2" r="0.7"/><circle cx="7.9" cy="8.2" r="0.7"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -494,11 +530,11 @@
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="wrap hero-inner">
-    <span class="eyebrow"><span class="dot"></span>Analista Sênior de Dados · BI</span>
+    <span class="eyebrow" data-en='<span class="dot"></span>Senior Data Analyst · BI'><span class="dot"></span>Analista Sênior de Dados · BI</span>
     <h1>Luan<br />Bordignon<span class="accent">.</span></h1>
-    <p class="role">Transformo dados brutos em <b>decisão</b> — modelagem, <b>Power BI</b>, SQL e Python.</p>
+    <p class="role" data-en='I turn raw data into <b>decisions</b> — modeling, <b>Power BI</b>, SQL and Python.'>Transformo dados brutos em <b>decisão</b> — modelagem, <b>Power BI</b>, SQL e Python.</p>
     <div class="status-row">
-      <span class="chip live"><span class="dot"></span>Aberto a oportunidades</span>
+      <span class="chip live" data-en='<span class="dot"></span>Open to opportunities'><span class="dot"></span>Aberto a oportunidades</span>
       <span class="chip">Florianópolis, BR</span>
       <span class="chip">PT · EN (C1)</span>
     </div>
@@ -512,18 +548,18 @@
     <div class="section-head">
       <div>
         <span class="section-index">01</span>
-        <h2>Sobre</h2>
+        <h2 data-en="About">Sobre</h2>
       </div>
     </div>
     <div class="about">
       <div>
-        <p>Trabalho com BI de ponta a ponta: da modelagem do dado até o dashboard que a diretoria usa pra decidir. Já atuei em varejo, tributário e logística, sempre com foco em transformar relatório em resposta.</p>
-        <p>Meu prazer é o meio do caminho — o modelo em estrela bem montado, a medida DAX que fecha, o pipeline que roda sozinho. É o que faz o número ser confiável.</p>
+        <p data-en="I work with end-to-end BI: from data modeling to the dashboard leadership uses to decide. I've worked in retail, tax and logistics, always focused on turning reports into answers.">Trabalho com BI de ponta a ponta: da modelagem do dado até o dashboard que a diretoria usa pra decidir. Já atuei em varejo, tributário e logística, sempre com foco em transformar relatório em resposta.</p>
+        <p data-en="What I enjoy is the middle of the road — the well-built star schema, the DAX measure that ties out, the pipeline that runs on its own. That's what makes the number trustworthy.">Meu prazer é o meio do caminho — o modelo em estrela bem montado, a medida DAX que fecha, o pipeline que roda sozinho. É o que faz o número ser confiável.</p>
       </div>
       <div class="facts">
-        <div class="fact"><span>Foco</span><b>Power BI · DAX</b></div>
-        <div class="fact"><span>Dados</span><b>SQL · Databricks</b></div>
-        <div class="fact"><span>Automação</span><b>Python · N8N</b></div>
+        <div class="fact"><span data-en="Focus">Foco</span><b>Power BI · DAX</b></div>
+        <div class="fact"><span data-en="Data">Dados</span><b>SQL · Databricks</b></div>
+        <div class="fact"><span data-en="Automation">Automação</span><b>Python · N8N</b></div>
         <div class="fact"><span>Cert.</span><b>Cloudera Data Analyst</b></div>
       </div>
     </div>
@@ -534,9 +570,9 @@
     <div class="section-head reveal">
       <div>
         <span class="section-index">02</span>
-        <h2>Projetos</h2>
+        <h2 data-en="Projects">Projetos</h2>
       </div>
-      <span class="eyebrow">em evolução</span>
+      <span class="eyebrow" data-en="evolving">em evolução</span>
     </div>
 
     <div class="grid">
@@ -544,38 +580,38 @@
       <!-- PROJETO 01 — Me2 (real) -->
       <article class="tile reveal">
         <div class="tile-top">
-          <span class="tag-domain">Locação · Desafio</span>
+          <span class="tag-domain" data-en="Rentals · Challenge">Locação · Desafio</span>
           <span class="eyebrow">01</span>
         </div>
-        <h3>Previsão de Receita — Me2 Rentals</h3>
-        <p>Desafio técnico de seleção: modelo estrela construído do zero e projeção de receita em três cenários, com documento de metodologia.</p>
+        <h3 data-en="Revenue Forecast — Me2 Rentals">Previsão de Receita — Me2 Rentals</h3>
+        <p data-en="Technical selection challenge: star schema built from scratch and revenue projection across three scenarios, with a methodology document.">Desafio técnico de seleção: modelo estrela construído do zero e projeção de receita em três cenários, com documento de metodologia.</p>
         <div class="kpi">
           <span class="kpi-num" data-to="3">0</span>
           <div class="kpi-meta">
-            <span class="kpi-label">cenários de receita projetados — P10 / P50 / P90</span>
+            <span class="kpi-label" data-en="projected revenue scenarios — P10 / P50 / P90">cenários de receita projetados — P10 / P50 / P90</span>
           </div>
         </div>
         <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
           <path class="line" d="M0,32 L37,26 L74,29 L111,18 L148,22 L185,11 L222,14 L260,4" />
         </svg>
-        <div class="stack"><span>Power BI</span><span>DAX</span><span>Modelagem estrela</span></div>
+        <div class="stack"><span>Power BI</span><span>DAX</span><span data-en="Star schema">Modelagem estrela</span></div>
         <a class="tile-cta" href="https://app.powerbi.com/view?r=eyJrIjoiMDJiNjFiYTctMTIyOC00MGU0LWFmMjgtNjdkMDI1OGRhOTc1IiwidCI6IjI5NzljZWMxLTg2MTMtNDFhNC05YzFjLTEwZTg4OTMwYzcxMyJ9&embedImagePlaceholder=true" target="_blank" rel="noopener">
-          Ver dashboard <span class="arrow">→</span>
+          <span data-en="View dashboard">Ver dashboard</span> <span class="arrow">→</span>
         </a>
       </article>
 
       <!-- PROJETO 02 — Painel de Folha de Pagamento (demo, dados fictícios) -->
       <article class="tile reveal">
         <div class="tile-top">
-          <span class="tag-domain">RH · Setor Público</span>
+          <span class="tag-domain" data-en="HR · Public Sector">RH · Setor Público</span>
           <span class="eyebrow">02</span>
         </div>
-        <h3>Painel de Folha de Pagamento</h3>
-        <p>Painel multi-página de folha — remuneração, encargos, rubricas, cargos, comissionados e previdência — com histórico de 2016 a 2026 e correção por IPCA/INPC. Dados fictícios para demonstração.</p>
+        <h3 data-en="Payroll Dashboard">Painel de Folha de Pagamento</h3>
+        <p data-en="Multi-page payroll dashboard — compensation, employer costs, pay items, positions, appointees and pension — with history from 2016 to 2026 and IPCA/INPC inflation adjustment. Fictitious data for demonstration.">Painel multi-página de folha — remuneração, encargos, rubricas, cargos, comissionados e previdência — com histórico de 2016 a 2026 e correção por IPCA/INPC. Dados fictícios para demonstração.</p>
         <div class="kpi">
           <span class="kpi-num" data-to="147">0</span>
           <div class="kpi-meta">
-            <span class="kpi-label">medidas DAX · modelo estrela · 36 páginas</span>
+            <span class="kpi-label" data-en="DAX measures · star schema · 36 pages">medidas DAX · modelo estrela · 36 páginas</span>
           </div>
         </div>
         <svg class="spark" viewBox="0 0 260 40" preserveAspectRatio="none" aria-hidden="true">
@@ -583,7 +619,7 @@
         </svg>
         <div class="stack"><span>Power BI</span><span>DAX</span><span>Power Query</span><span>Oracle</span></div>
         <a class="tile-cta" href="https://app.powerbi.com/view?r=eyJrIjoiMGZhOGQzM2UtOGFiYi00MGQ2LWE2OWUtNzdhZTEyN2I1MWI0IiwidCI6IjI5NzljZWMxLTg2MTMtNDFhNC05YzFjLTEwZTg4OTMwYzcxMyJ9&embedImagePlaceholder=true" target="_blank" rel="noopener">
-          Ver dashboard <span class="arrow">→</span>
+          <span data-en="View dashboard">Ver dashboard</span> <span class="arrow">→</span>
         </a>
       </article>
 
@@ -600,19 +636,19 @@
     </div>
     <div class="skills-grid">
       <div class="skill-col">
-        <h4>Visualização</h4>
+        <h4 data-en="Visualization">Visualização</h4>
         <ul><li>Power BI</li><li>DAX</li><li>Looker Studio</li></ul>
       </div>
       <div class="skill-col">
-        <h4>Dados</h4>
-        <ul><li>SQL</li><li>Databricks</li><li>Modelagem estrela</li></ul>
+        <h4 data-en="Data">Dados</h4>
+        <ul><li>SQL</li><li>Databricks</li><li data-en="Star schema">Modelagem estrela</li></ul>
       </div>
       <div class="skill-col">
-        <h4>Linguagens</h4>
+        <h4 data-en="Languages">Linguagens</h4>
         <ul><li>Python</li><li>DAX</li><li>M / Power Query</li></ul>
       </div>
       <div class="skill-col">
-        <h4>Automação</h4>
+        <h4 data-en="Automation">Automação</h4>
         <ul><li>N8N</li><li>Salesforce</li><li>ETL</li></ul>
       </div>
     </div>
@@ -620,13 +656,13 @@
 
   <!-- ================= CONTATO ================= -->
   <section id="contato" class="contact reveal">
-    <h2>Vamos conversar.</h2>
-    <p>Aberto a oportunidades em BI e Analytics — inclusive remoto internacional.</p>
+    <h2 data-en="Let's talk.">Vamos conversar.</h2>
+    <p data-en="Open to opportunities in BI and Analytics — including international remote.">Aberto a oportunidades em BI e Analytics — inclusive remoto internacional.</p>
     <div class="actions">
-      <a class="btn primary" href="mailto:luanre59@gmail.com">E-mail →</a>
+      <a class="btn primary" href="mailto:luanre59@gmail.com" data-en="Email →">E-mail →</a>
       <a class="btn ghost" href="https://www.linkedin.com/in/luan-bordignon-885547148/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn ghost" href="https://github.com/alchemydot" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn ghost" href="Luan_Bordignon_CV_BR.pdf" download>Baixar CV</a>
+      <a class="btn ghost" href="Luan_Bordignon_CV_BR.pdf" download data-en="Download CV">Baixar CV</a>
     </div>
   </section>
 
@@ -640,7 +676,30 @@
 <script>
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Reveal on scroll + trigger sparkline draw + KPI count-up
+  // ----- i18n (PT/EN) -----
+  const i18nEls = document.querySelectorAll('[data-en]');
+  i18nEls.forEach(el => el.setAttribute('data-pt', el.innerHTML));
+
+  function setLang(lang) {
+    i18nEls.forEach(el => {
+      el.innerHTML = (lang === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-pt');
+    });
+    document.documentElement.lang = (lang === 'en') ? 'en' : 'pt-br';
+    document.querySelectorAll('.flag').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === lang)
+    );
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  document.querySelectorAll('.flag').forEach(b =>
+    b.addEventListener('click', () => setLang(b.dataset.lang))
+  );
+
+  let startLang = 'pt';
+  try { startLang = localStorage.getItem('lang') || 'pt'; } catch (e) {}
+  setLang(startLang);
+
+  // ----- Reveal on scroll + sparkline draw + KPI count-up -----
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
